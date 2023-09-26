@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <record id="view_order_form_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">sale.order.form</field>-->
+    <!--        <field name="model">sale.order</field>-->
+    <!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <field name="state" position="before">-->
+    <!--                <button name="shipment" id="shipment" string="Shipment" class="btn-primary"-->
+    <!--                        type="object"-->
+    <!--                        attrs="{'invisible': ['|',('state', 'not in', ['sale']),('shipment_state','!=','draft')]}"/>-->
+    <!--            </field>-->
+    <!--            <field name="partner_id" position="after">-->
+    <!--                <field name="clint_id"/>-->
+    <!--                <field name="shipment_type"/>-->
+    <!--                <field name="incoterms"/>-->
+    <!--                <field name="country"/>-->
+    <!--                <field name="cargo_type"/>-->
+    <!--                <field name="chargeable_weight"/>-->
+
+    <!--            </field>-->
+    <!--            <field name="payment_term_id" position="after">-->
+    <!--&lt;!&ndash;                <field name="agent_id" widget="many2many_tags"/>&ndash;&gt;-->
+    <!--                <field name="currency_id"/>-->
+    <!--                <field name="expected_profit"/>-->
+    <!--                <field name="shipment_state" invisible="1"/>-->
+    <!--            </field>-->
+
+    <!--        </field>-->
+    <!--    </record>-->
+    <!--    <record id="view_partner_form_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">res.partner.form</field>-->
+    <!--        <field name="model">res.partner</field>-->
+    <!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <field name="name" position="replace">-->
+    <!--                <field id="company" class="text-break" name="name" default_focus="1" placeholder="e.g. Lumber Inc"-->
+    <!--                       widget="field_partner_autocomplete" on_change="1" context="{'name': name}"-->
+    <!--                       modifiers="{&quot;invisible&quot;: [[&quot;is_company&quot;, &quot;=&quot;, false]], &quot;required&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;]]}"/>-->
+
+    <!--            </field>-->
+    <!--            <field name="vat" position="after">-->
+    <!--                <field name="clint_id" context="{'clint_id': clint_id}"/>-->
+    <!--                <field name="account_owner" context="{'account_owner': account_owner}"/>-->
+    <!--                <field name="importance" context="{'importance': importance}"/>-->
+    <!--                <field name="relationship_level" context="{'relationship_level': relationship_level}"/>-->
+    <!--                <field name="source" context="{'source': source}"/>-->
+    <!--            </field>-->
+
+    <!--        </field>-->
+    <!--    </record>-->
+
+     <record id="product_template_only_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="default_code" position="before">
+                <field name="commission"/>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="product_normal_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="default_code" position="before">
+                <field name="commission"/>
+            </field>
+
+        </field>
+    </record>
+
+
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="before">
+                <field name="commission"/>
+                <field name="commission_amount"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
